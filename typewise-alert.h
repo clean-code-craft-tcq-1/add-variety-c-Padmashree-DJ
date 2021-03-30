@@ -14,8 +14,8 @@ typedef enum {
 
 typedef struct
 {
-	lowerLimit;
-	upperLimit;
+	double lowerLimit;
+	double upperLimit;
 	CoolingType coolingTypeIdentifier;
 }BreachLimits_tst;
 
