@@ -95,3 +95,49 @@ TEST_CASE("Check and alert functionality check to controller in case of MED_ACTI
 	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
      checkAndAlert(TO_CONTROLLER, batterycharname, -5);
 }
+
+
+TEST_CASE("Check and alert functionality check to email in case of PASSIVE_COOLING:NORMAL") {
+	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of PASSIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, -4);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of PASSIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 50);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:NORMAL") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, -4);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 50);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of MED_ACTIVE_COOLING:NORMAL") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of MED_ACTIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, 60);
+}
+
+TEST_CASE("Check and alert functionality check to email in case of MED_ACTIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_EMAIL, batterycharname, -5);
+}
