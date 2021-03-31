@@ -51,7 +51,47 @@ TEST_CASE("infers the breach according to limits in MED_ACTIVE_COOLING for TOO_L
   REQUIRE(classifyTemperatureBreach(MED_ACTIVE_COOLING, -4) == TOO_LOW);
 }
 
-TEST_CASE("Check and alert functionality check for controller") {
+TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_COOLING:NORMAL") {
 	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
-     checkAndAlert(TO_CONTROLLER, batterycharname, 30));
- }
+     checkAndAlert(TO_CONTROLLER, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, -4);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, 50);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of HI_ACTIVE_COOLING:NORMAL") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of HI_ACTIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, -4);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of HI_ACTIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, 50);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of MED_ACTIVE_COOLING:NORMAL") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, 30);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of MED_ACTIVE_COOLING:TOO_HIGH") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, 60);
+}
+
+TEST_CASE("Check and alert functionality check to controller in case of MED_ACTIVE_COOLING:TOO_LOW") {
+	 BatteryCharacter batterycharname= {MED_ACTIVE_COOLING, "BMS"};
+     checkAndAlert(TO_CONTROLLER, batterycharname, -5);
+}
