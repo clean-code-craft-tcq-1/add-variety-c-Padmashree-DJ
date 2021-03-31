@@ -51,7 +51,7 @@ TEST_CASE("infers the breach according to limits in MED_ACTIVE_COOLING for TOO_L
   REQUIRE(classifyTemperatureBreach(MED_ACTIVE_COOLING, 0) == TOO_LOW);
 }
 
-TEST_CASE("Check and alert functionality check for controller") {
-	BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
-  REQUIRE(checkAndAlert(TO_CONTROLLER, batterycharname, 30) == NORMAL);
-}
+// TEST_CASE("Check and alert functionality check for controller") {
+	// BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
+  // REQUIRE(checkAndAlert(TO_CONTROLLER, batterycharname, 30));
+// }
