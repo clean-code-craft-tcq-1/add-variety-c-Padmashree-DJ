@@ -19,7 +19,6 @@ typedef struct
 	CoolingType coolingTypeIdentifier;
 }BreachLimits_tst;
 
-
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
@@ -38,3 +37,6 @@ void checkAndAlert(
 
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
+void TooLowmessage (const char* recepient);
+void Toohighmessage (const char* recepient);
+void NormalMessage (const char* recepient);
