@@ -20,7 +20,7 @@ TEST_CASE("infers the breach according to limits in HI_ACTIVE_COOLING for NORMAL
 }
 
 TEST_CASE("infers the breach according to limits in HI_ACTIVE_COOLING for TOO_LOW case") {
-  REQUIRE(classifyTemperatureBreach(HI_ACTIVE_COOLING, 0) == TOO_LOW);
+  REQUIRE(classifyTemperatureBreach(HI_ACTIVE_COOLING, -4) == TOO_LOW);
 }
 
 TEST_CASE("infers the breach according to limits in HI_ACTIVE_COOLING for TOO_HIGH case") {
@@ -32,7 +32,7 @@ TEST_CASE("infers the breach according to limits in PASSIVE_COOLING for NORMAL c
 }
 
 TEST_CASE("infers the breach according to limits in PASSIVE_COOLING for TOO_LOW case") {
-  REQUIRE(classifyTemperatureBreach(PASSIVE_COOLING, 0) == TOO_LOW);
+  REQUIRE(classifyTemperatureBreach(PASSIVE_COOLING, -4) == TOO_LOW);
 }
 
 TEST_CASE("infers the breach according to limits in PASSIVE_COOLING for TOO_HIGH case") {
@@ -48,7 +48,7 @@ TEST_CASE("infers the breach according to limits in MED_ACTIVE_COOLING for TOO_H
 }
 
 TEST_CASE("infers the breach according to limits in MED_ACTIVE_COOLING for TOO_LOW case") {
-  REQUIRE(classifyTemperatureBreach(MED_ACTIVE_COOLING, 0) == TOO_LOW);
+  REQUIRE(classifyTemperatureBreach(MED_ACTIVE_COOLING, -4) == TOO_LOW);
 }
 
 // TEST_CASE("Check and alert functionality check for controller") {
