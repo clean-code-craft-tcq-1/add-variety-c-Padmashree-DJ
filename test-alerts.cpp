@@ -112,12 +112,12 @@ TEST_CASE("Check and alert functionality check to email in case of PASSIVE_COOLI
      REQUIRE(checkAndAlert(TO_EMAIL, batterycharname, 50)==SentToEmail_TooHigh);
 }
 
-/* TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:NORMAL") {
+TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:NORMAL") {
 	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
-     checkAndAlert(TO_EMAIL, batterycharname, 30);
+     REQUIRE(checkAndAlert(TO_CONSOLE, batterycharname, 30)==SentToConsole);
 }
 
-TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:TOO_LOW") {
+/* TEST_CASE("Check and alert functionality check to email in case of HI_ACTIVE_COOLING:TOO_LOW") {
 	 BatteryCharacter batterycharname= {HI_ACTIVE_COOLING, "BMS"};
      checkAndAlert(TO_EMAIL, batterycharname, -4);
 }
