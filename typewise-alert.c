@@ -3,10 +3,25 @@
 
 BreachLimits_tst BreachLimitArr[]={{0,35, PASSIVE_COOLING},{0,45,HI_ACTIVE_COOLING},{0,40,MED_ACTIVE_COOLING}}; 
 
-Successtype (*AlertTargetFunc[])(BreachType breachType)={	sendToController,sendToEmail, sendToConsole};
-
-Successtype (*EmailMessage[])(const char* recepient)={NormalMessage,TooLowmessage,Toohighmessage};
-
+/**
+ ***************************************************************************************************
+ * Function Name: inferBreach
+ * 
+ * Function Description: Infers the breach type of the value based on the lowerLimit and upperLimit .
+ *
+ * \param  Inputs:- double value
+ *					double lowerLimit
+ *					double upperLimit
+ *					
+ *		   Outputs:- None
+ *         
+ * \return  BreachType (ENUM)
+ *          
+ * \retval  NORMAL:- Input Value is within normal range given.
+ *          TOO_LOW:- Input Value falls below lower limit given.
+ *          TOO_HIGH:-Input Value is above upper limit given.
+ ***************************************************************************************************
+ */
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
     return TOO_LOW;
@@ -17,56 +32,27 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
+/**
+ ***************************************************************************************************
+ * Function Name: classifyTemperatureBreach
+ * 
+ * Function Description: Classifies the temperature breach based on cooling type and temeperature in degree celcius .
+ *
+ * \param  Inputs:- CoolingType coolingType
+ *					double temperatureInC
+ *					double upperLimit
+ *					
+ *		   Outputs:- None
+ *         
+ * \return  BreachType (ENUM)
+ *          
+ * \retval  NORMAL:- Input Value is within normal range given.
+ *          TOO_LOW:- Input Value falls below lower limit given.
+ *          TOO_HIGH:-Input Value is above upper limit given.
+ ***************************************************************************************************
+ */
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) 
 {
   return inferBreach(temperatureInC, BreachLimitArr[coolingType].lowerLimit, BreachLimitArr[coolingType].upperLimit);
 }
-
-
-
-Successtype checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
-{
-   BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC);
-   Successtype CheckAndAlertSuccess =(*AlertTargetFunc[alertTarget])(breachType);
-   return CheckAndAlertSuccess;
-}
-
-Successtype sendToController(BreachType breachType) {
-  const unsigned short header = 0xfeed;
-  printf("%x : %x\n", header, breachType);
-  return SentToController;
-}
-
-Successtype sendToEmail(BreachType breachType) {
-  const char* recepient = "a.b@c.com";
-  Successtype SendToEmailSuccess=(*EmailMessage[breachType])(recepient);
-  return SendToEmailSuccess;
-}
-
-Successtype sendToConsole(BreachType breachType) {
-  printf("the temperature is %x \n", breachType);
-  return SentToConsole;
-}
-
-Successtype TooLowmessage (const char* recepient)
-{
-	printf("To: %s\n", recepient);
-    printf("Hi, the temperature is too low\n");
-    return SentToEmail_TooLow;
-}
-
-Successtype Toohighmessage (const char* recepient)
-{
-	printf("To: %s\n", recepient);
-    printf("Hi, the temperature is too high\n");
-    return SentToEmail_TooHigh;
-}
-
-Successtype NormalMessage (const char* recepient)
-{
-	printf("To: %s\n", recepient);
-    printf("Hi, the temperature is normal\n");
-    return SentToEmail_Normal;
-}
-	
 
