@@ -50,26 +50,6 @@ Successtype sendToController(BreachType breachType) {
   return SentToController;
 }
 
-/**
- ***************************************************************************************************
- * Function Name: sendToEmail 
- * 
- * Function Description: sendToEmail is called in the context of checkAndAlert() based on the breachtype and input alertTarget.
- *
- * \param  Inputs:- BreachType breachType
- *					
- *		   Outputs:- None
- *         
- * \return  Successtype  (ENUM) 
- *          
- * \retval  SendToEmailSuccess:- Which depicts that checkAndAlert() function successfully alerted the tartget device,Email.
- ***************************************************************************************************
- */
-Successtype sendToEmail(BreachType breachType) {
-  const char* recepient = "a.b@c.com";
-  Successtype SendToEmailSuccess=(*EmailMessage[breachType])(recepient);
-  return SendToEmailSuccess;
-}
 
 /**
  ***************************************************************************************************
