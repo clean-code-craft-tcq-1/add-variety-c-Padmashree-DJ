@@ -32,16 +32,6 @@ TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_
     REQUIRE( checkAndAlert(TO_CONTROLLER, batterycharname, 30)== SentToController);
 }
 
-TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_COOLING:TOO_LOW") {
-	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
-      REQUIRE(checkAndAlert(TO_CONTROLLER, batterycharname, -4)== SentToController);
-}
-
-TEST_CASE("Check and alert functionality check to controller in case of PASSIVE_COOLING:TOO_HIGH") {
-	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
-     REQUIRE(checkAndAlert(TO_CONTROLLER, batterycharname, 50)==SentToController);
-}
-
 TEST_CASE("Check and alert functionality check to email in case of PASSIVE_COOLING:NORMAL") {
 	 BatteryCharacter batterycharname= {PASSIVE_COOLING, "BMS"};
      REQUIRE(checkAndAlert(TO_EMAIL, batterycharname, 30)==SentToEmail_Normal);
