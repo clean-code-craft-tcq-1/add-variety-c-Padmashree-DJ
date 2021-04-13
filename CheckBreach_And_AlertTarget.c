@@ -3,7 +3,7 @@
 
 Successtype (*AlertTargetFunc[])(BreachType breachType)={	sendToController,sendToEmail, sendToConsole};
 
-SentSuccessfullytoController=0;
+unsigned int SentSuccessfullytoController=0;
 /**
  ***************************************************************************************************
  * Function Name: checkAndAlert 
