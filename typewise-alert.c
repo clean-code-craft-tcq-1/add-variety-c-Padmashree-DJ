@@ -1,6 +1,27 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
+BreachLimits_tst BreachLimitArr[]={{0,35, PASSIVE_COOLING},{0,45,HI_ACTIVE_COOLING},{0,40,MED_ACTIVE_COOLING}}; 
+
+/**
+ ***************************************************************************************************
+ * Function Name: inferBreach
+ * 
+ * Function Description: Infers the breach type of the value based on the lowerLimit and upperLimit .
+ *
+ * \param  Inputs:- double value
+ *					double lowerLimit
+ *					double upperLimit
+ *					
+ *		   Outputs:- None
+ *         
+ * \return  BreachType (ENUM)
+ *          
+ * \retval  NORMAL:- Input Value is within normal range given.
+ *          TOO_LOW:- Input Value falls below lower limit given.
+ *          TOO_HIGH:-Input Value is above upper limit given.
+ ***************************************************************************************************
+ */
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
     return TOO_LOW;
@@ -11,61 +32,27 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
-BreachType classifyTemperatureBreach(
-    CoolingType coolingType, double temperatureInC) {
-  int lowerLimit = 0;
-  int upperLimit = 0;
-  switch(coolingType) {
-    case PASSIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 35;
-      break;
-    case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
-      break;
-    case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 40;
-      break;
-  }
-  return inferBreach(temperatureInC, lowerLimit, upperLimit);
+/**
+ ***************************************************************************************************
+ * Function Name: classifyTemperatureBreach
+ * 
+ * Function Description: Classifies the temperature breach based on cooling type and temeperature in degree celcius .
+ *
+ * \param  Inputs:- CoolingType coolingType
+ *					double temperatureInC
+ *					double upperLimit
+ *					
+ *		   Outputs:- None
+ *         
+ * \return  BreachType (ENUM)
+ *          
+ * \retval  NORMAL:- Input Value is within normal range given.
+ *          TOO_LOW:- Input Value falls below lower limit given.
+ *          TOO_HIGH:-Input Value is above upper limit given.
+ ***************************************************************************************************
+ */
+BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) 
+{
+  return inferBreach(temperatureInC, BreachLimitArr[coolingType].lowerLimit, BreachLimitArr[coolingType].upperLimit);
 }
 
-void checkAndAlert(
-    AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
-
-  BreachType breachType = classifyTemperatureBreach(
-    batteryChar.coolingType, temperatureInC
-  );
-
-  switch(alertTarget) {
-    case TO_CONTROLLER:
-      sendToController(breachType);
-      break;
-    case TO_EMAIL:
-      sendToEmail(breachType);
-      break;
-  }
-}
-
-void sendToController(BreachType breachType) {
-  const unsigned short header = 0xfeed;
-  printf("%x : %x\n", header, breachType);
-}
-
-void sendToEmail(BreachType breachType) {
-  const char* recepient = "a.b@c.com";
-  switch(breachType) {
-    case TOO_LOW:
-      printf("To: %s\n", recepient);
-      printf("Hi, the temperature is too low\n");
-      break;
-    case TOO_HIGH:
-      printf("To: %s\n", recepient);
-      printf("Hi, the temperature is too high\n");
-      break;
-    case NORMAL:
-      break;
-  }
-}
