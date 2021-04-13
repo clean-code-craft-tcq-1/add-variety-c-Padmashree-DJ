@@ -19,8 +19,10 @@ typedef struct
 	CoolingType coolingTypeIdentifier;
 }BreachLimits_tst;
 
+extern unsigned int SentSuccessfullytoController;
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
+void DioWriteToController(const unsigned short header, BreachType breachType);
 
 typedef enum {
   TO_CONTROLLER,
@@ -34,7 +36,6 @@ typedef struct {
 } BatteryCharacter;
 
 typedef enum {
-
 	SentToController,
 	SentToEmail_Normal,
 	SentToEmail_TooLow,
