@@ -30,7 +30,9 @@ Successtype checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar,
 
 void DioWriteToController(const unsigned short header, BreachType breachType)
 {
-      SentSuccessfullytoController = 1;
+	(void)header;
+	(void)breachType;
+    SentSuccessfullytoController = 1;
 }
 /**
  ***************************************************************************************************
@@ -52,7 +54,7 @@ Successtype sendToController(BreachType breachType) {
   const unsigned short header = 0xfeed;
   //clear coltroller status before writing to it.
   SentSuccessfullytoController=0;
-  DioWriteToController( header, breachtype );
+  DioWriteToController( header, breachType );
   return SentToController;
 }
 
